@@ -1,1 +1,1 @@
-# s2n-runtime
+# oscana-s2n-runtime-struts
