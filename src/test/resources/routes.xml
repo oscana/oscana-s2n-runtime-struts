@@ -1,0 +1,42 @@
+<routes>
+    <!-- Executeのテストに関する設定 -->
+    <match path="/defaultExecute" action="defaultExecute" controller="ExecuteTest" />
+    <match path="/notRemoveSession" action="notRemove" controller="ExecuteTest" />
+    <match path="/removeSession" action="remove" controller="ExecuteTest" />
+    <match path="/notRemoveSession02" action="notRemove02" controller="ExecuteTest" />
+    <match path="/actionFormAttr" action="setAttr" controller="ExecuteTest" />
+    <match path="/defaultReset" action="defaultReset" controller="ExecuteTest" />
+    <match path="/testReset" action="testForReset" controller="ExecuteTest" />
+    <match path="/noReset" action="noReset" controller="ExecuteTest" />
+    <match path="/resetNotExist" action="resetNotExist" controller="ExecuteTest" />
+    <match path="/executeErrMsg" action="executeErrMsg" controller="ExecuteTest" />
+    <match path="/normalize" action="normalizeTest" controller="ExecuteTest" />
+    <match path="/setValWithValid" action="setValWithValidTest" controller="ExecuteTest" />
+
+    <match path="/hasNoReset" action="hasNoReset" controller="ExecuteErrTest" />
+    <match path="/hasNoField" action="hasNoField" controller="ExecuteNoFieldTest" />
+
+    <match path="/hasNoForm" action="hasNoForm" controller="ExecuteNoFormTest" />
+
+    <!-- S2NValidationStrategyyのテストに関する設定 -->
+     <match path="/s2nValidateStopWithErr" action="doValidStopWithErr" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr01" action="doValidNotStopWithErr01" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr02" action="doValidNotStopWithErr02" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr03" action="doValidNotStopWithErr03" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr04" action="doValidNotStopWithErr04" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr05" action="doValidNotStopWithErr05" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr06" action="doValidNotStopWithErr06" controller="S2NValidationStrategy" />
+     <match path="/s2nValidateNotStopWithErr07" action="doValidNotStopWithErr07" controller="S2NValidationStrategy" />
+     <match path="/outputMessage" action="outputMessage" controller="S2NValidationStrategy" />
+
+    <!-- バリデーションのtarget属性テストに関する設定 -->
+    <match path="/targetTest1" action="targetMethod1" controller="ValidateTargetTest" />
+    <match path="/targetTest2" action="targetMethod2" controller="ValidateTargetTest" />
+    <match path="/notTargetTest" action="notTargetMethod" controller="ValidateTargetTest" />
+
+    <!-- OscanaHttpResourceConverUtilのテスト用設定 -->
+    <match path="/sample/sampleSearchList/index" action="index" controller="Sample" />
+    <match path="/sample/sampleSearchList/doSearch/:pageno" controller="sample.sampleSearchList" action="doSearch" />
+    <match path="/sample/sampleSearchList/fwCreate/:kbn/:userId/:afileId/:bfileId" controller="sample.sampleSearchList" action="fwCreate" />
+
+</routes>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+  <!-- 環境設定ファイル -->
+  <config-file file="common-test.config" />
+  <config-file file="env-test.config" />
+
+  <!-- DB用コンポーネント定義 -->
+   <!-- テーブル定義 -->
+   <import file="nablarch/schema-config.xml" />
+   <!-- web固有設定の読み込み -->
+   <!-- データベース設定 -->
+   <import file="nablarch/webui/db-for-webui.xml"/>
+   <component name="dialect" class="nablarch.core.db.dialect.H2Dialect" />
+   <import file="db-for-webui_test.xml"/>
+
+    <!-- ハンドラキュー構成 -->
+    <component name="httpCharacterEncodingHandler"
+        class="nablarch.fw.web.handler.HttpCharacterEncodingHandler" />
+    <component name="globalErrorHandler"
+        class="nablarch.fw.handler.GlobalErrorHandler" />
+    <component name="nablarchWebContextHandler"
+        class="nablarch.fw.dicontainer.nablarch.NablarchWebContextHandler" />
+    <component name="httpResourceHolderHandler"
+        class="oscana.s2n.handler.HttpResourceHolderHandler" />
+    <component name="httpResourceHolderUpdateHandler"
+        class="oscana.s2n.handler.HttpResourceHolderUpdateHandler" />
+    <component name="httpResponseHandler"
+        class="nablarch.fw.web.handler.HttpResponseHandler" />
+    <component name="secureHandler"
+        class="nablarch.fw.web.handler.SecureHandler" />
+    <component name="multipartHandler"
+        class="nablarch.fw.web.upload.MultipartHandler">
+        <property name="uploadSettings">
+            <component class="nablarch.fw.web.upload.UploadSettings">
+                <property name="autoCleaning"
+                    value="${nablarch.uploadSettings.autoCleaning}" />
+                <property name="contentLengthLimit"
+                    value="${nablarch.uploadSettings.contentLengthLimit}" />
+            </component>
+        </property>
+    </component>
+    <component name="threadContextHandler" class="nablarch.common.handler.threadcontext.ThreadContextHandler"/>
+    <component name="threadContextClearHandler" class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+    <component name="sessionStoreHandler"
+        class="nablarch.common.web.session.SessionStoreHandler">
+        <property name="sessionManager" ref="sessionManager" />
+        <property name="cookieName" value="NABLARCH_SID" />
+        <property name="cookiePath" value="/" />
+        <property name="cookieSecure" value="false" />
+    </component>
+    <component name="forwardingHandler"
+        class="nablarch.fw.web.handler.ForwardingHandler" />
+    <component name="errorHandler"
+         class="nablarch.fw.web.handler.HttpErrorHandler" />
+
+    <component name="packageMapping"
+        class="nablarch.integration.router.RoutesMapping">
+        <property name="routes" value="routes.xml" />
+        <property name="baseUri" value="" />
+        <property name="checkInterval"
+            value="${nablarch.routesMapping.checkInterval}" />
+        <property name="basePackage"
+            value="oscana.s2n.sample.support" />
+         <property name="delegateFactory">
+            <component
+                class="nablarch.fw.dicontainer.nablarch.ContainerLookupDelegateFactory" />
+        </property>
+        <property name="methodBinderFactory">
+            <component
+                class="oscana.s2n.handler.S2NRoutesMethodBinderFactory" />
+        </property>
+    </component>
+
+    <!-- セッション管理設定START -->
+    <component name="sessionManager"
+        class="nablarch.common.web.session.SessionManager">
+        <property name="defaultStoreName" value="httpSession" />
+        <property name="availableStores">
+            <list>
+                <!-- HTTPセッション上に保存するセッションストア -->
+                <component-ref name="httpSessionStore" />
+            </list>
+        </property>
+    </component>
+
+    <!-- HTTPセッション上に保存するセッションストア -->
+    <component name="httpSessionStore"
+        class="nablarch.common.web.session.store.HttpSessionStore">
+        <property name="expires" value="1800" />
+        <property name="stateEncoder" ref="serializeEncoder" />
+    </component>
+
+    <!-- HTTPセッションストア・DBストアの直列化に使用するコンポーネント -->
+    <component name="serializeEncoder"
+        class="nablarch.common.web.session.encoder.JavaSerializeStateEncoder" />
+
+    <!-- システム日時取得コンポーネントの設定 -->
+    <component name="systemTimeProvider"
+        class="nablarch.core.date.BasicSystemTimeProvider" />
+    <!-- セッション管理設定END -->
+
+    <component name="annotationAutoContainerProvider"
+        class="nablarch.fw.dicontainer.nablarch.AnnotationAutoContainerProvider">
+        <property name="requestContextSupplier"
+            ref="nablarchWebContextHandler" />
+        <property name="sessionContextSupplier"
+            ref="nablarchWebContextHandler" />
+        <!--  -->
+        <property name="traversalConfigs">
+            <list>
+            <component class="oscana.DIConfig"/>
+            <component class="oscana.s2n.DIConfig"/>
+            </list>
+        </property>
+    </component>
+
+    <!-- 初期化が必要なコンポーネント -->
+    <component name="initializer"
+        class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+        <property name="initializeList">
+            <list>
+                <!-- NablarchDI -->
+                <component-ref name="annotationAutoContainerProvider" />
+<component-ref name="messageCache" />
+            </list>
+        </property>
+    </component>
+
+   <component class="nablarch.core.cache.BasicStaticDataCache" name="messageCache">
+  <property name="loader">
+    <!-- 多言語化したPropertiesStringResourceLoaderの定義 -->
+    <component class="nablarch.core.message.PropertiesStringResourceLoader">
+      <!-- サポートする言語 -->
+      <property name="locales">
+        <list>
+          <value>ja</value>
+          <value>en</value>
+        </list>
+      </property>
+
+    </component>
+  </property>
+</component>
+
+<component name="stringResourceHolder" class="nablarch.core.message.StringResourceHolder">
+  <!-- 多言語化したPropertiesStringResourceLoaderを持つBasicStaticDataCacheを設定する -->
+  <property name="stringResourceCache" ref="messageCache" />
+</component>
+
+  <component name="constraintViolationConverterFactory" class="oscana.s2n.validation.OscanaCompatibleConstraintViolationConverterFactory" />
+
+</component-configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+  <!-- インターセプタの実行順定義
+     要注意
+             ※1.Executeを最後に定義する
+             ※2.同じ名前定義された場合、後勝ちのため、プロジェクトの設定ファイルに上書きしないようにする-->
+  <list name="interceptorsOrder">
+    <value>nablarch.common.web.token.OnDoubleSubmission</value>
+    <value>nablarch.common.web.token.UseToken</value>
+    <value>nablarch.fw.web.interceptor.OnErrors</value>
+    <value>nablarch.fw.web.interceptor.OnError</value>
+    <value>nablarch.common.web.interceptor.InjectForm</value>
+    <value>oscana.s2n.common.web.interceptor.Execute</value>
+  </list>
+
+</component-configuration>

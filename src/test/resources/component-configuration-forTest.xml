@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-configuration
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+
+    <component name="nablarchWebContextHandler"
+        class="nablarch.fw.dicontainer.nablarch.NablarchWebContextHandler" />
+
+    <component name="httpResourceHolderHandler"
+        class="oscana.s2n.handler.HttpResourceHolderHandler" />
+
+    <component name="httpResourceHolderUpdateHandler"
+        class="oscana.s2n.handler.HttpResourceHolderUpdateHandler" />
+
+    <component name="annotationAutoContainerProvider"
+        class="nablarch.fw.dicontainer.nablarch.AnnotationAutoContainerProvider">
+        <property name="requestContextSupplier"
+            ref="nablarchWebContextHandler" />
+        <property name="sessionContextSupplier"
+            ref="nablarchWebContextHandler" />
+    </component>
+  <!-- 初期化が必要なコンポーネント -->
+  <component name="initializer"
+             class="nablarch.core.repository.initialization.BasicApplicationInitializer">
+    <property name="initializeList">
+      <list>
+        <!-- BasicStaticDataCacheを初期化対象に追加する -->
+        <!-- NablarchDI -->
+        <component-ref name="annotationAutoContainerProvider"/>
+
+      </list>
+    </property>
+  </component>
+
+  <component name="systemTimeProvider" class="nablarch.core.date.BasicSystemTimeProvider" />
+
+</component-configuration>

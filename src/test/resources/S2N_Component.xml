@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component-configuration
+    xmlns="http://tis.co.jp/nablarch/component-configuration"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
+
+    <!-- SQL解析 -->
+    <component name="statementFactory"
+        class="nablarch.core.db.statement.BasicStatementFactory"
+        autowireType="None">
+        <property name="fetchSize"
+            value="${nablarch.statementFactory.fetchSize}" />
+        <property name="queryTimeout"
+            value="${nablarch.statementFactory.queryTimeout}" />
+        <property name="updatePreHookObjectHandlerList"
+            ref="fieldAnnotationHandler" />
+        <property name="sqlParameterParserFactory">
+            <component
+                class="nablarch.core.db.statement.BasicSqlParameterParserFactory">
+                <property name="sqlConvertors">
+                    <list>
+                        <component
+                            class="nablarch.core.db.statement.sqlconvertor.VariableConditionSyntaxConvertor" />
+                        <component
+                            class="nablarch.core.db.statement.sqlconvertor.VariableInSyntaxConvertor" />
+                        <component
+                            class="nablarch.core.db.statement.sqlconvertor.VariableOrderBySyntaxConvertor" />
+                    </list>
+                </property>
+            </component>
+        </property>
+        <property name="sqlStatementExceptionFactory"
+            ref="statementExceptionFactory" />
+        <property name="sqlLoader" ref="sqlLoader">
+        </property>
+    </component>
+
+    <!-- DaoContextのカスタマイズ -->
+    <component name="daoContextFactory" class="oscana.s2n.common.dao.S2NDaoContextFactory">
+        <property name="daoContextFactory">
+            <component class="nablarch.common.dao.BasicDaoContextFactory" />
+        </property>
+    </component>
+
+    <!-- パッケージマッピングの設定 -->
+  <component name="packageMapping"
+             class="nablarch.integration.router.RoutesMapping">
+      <property name="baseUri" value="" />
+      <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
+      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+      <property name="delegateFactory">
+          <component class="nablarch.fw.dicontainer.nablarch.ContainerLookupDelegateFactory"/>
+      </property>
+      <property name="methodBinderFactory">
+          <component class="oscana.s2n.handler.S2NRoutesMethodBinderFactory" />
+      </property>
+  </component>
+
+  <!-- バリデーション -->
+  <component name="constraintViolationConverterFactory" class="oscana.s2n.validation.OscanaCompatibleConstraintViolationConverterFactory" />
+
+</component-configuration>
