@@ -45,6 +45,7 @@
     <!-- パッケージマッピングの設定 -->
   <component name="packageMapping"
              class="nablarch.integration.router.RoutesMapping">
+      <property name="routes" value="routes.xml"/>
       <property name="baseUri" value="" />
       <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
       <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
