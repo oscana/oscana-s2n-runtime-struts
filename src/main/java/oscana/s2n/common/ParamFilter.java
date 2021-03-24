@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * UniversalDao呼び出し時のパラメータを変換するためのユーティリティクラス。<br>
  * <br>
- *   本クラスは自動生成されたソースコード中に埋め込まれ、変換元のSAStrutsで使われていた表現を、Nablarchの表現に変換する用途で用いる。
+ *   本クラスは自動生成されたソースコード中に埋め込まれ、変換元のFWで使われていた表現を、Nablarchの表現に変換する用途で用いる。
  *
  * @author Fumihiko Yamamoto
  *
@@ -48,8 +48,8 @@ public class ParamFilter {
     }
 
     /**
-     * SAStrutsのSQLファイル名をNablarchのSQLキーに変換する。
-     * @param sqlFileName SAStrutsのSQLファイル名
+     * 変換元FWのSQLファイル名をNablarchのSQLキーに変換する。
+     * @param sqlFileName 変換元FWのSQLファイル名
      * @return NablarchのSQLキー
      */
     public static String sqlFileNameToKey(String sqlFileName) {

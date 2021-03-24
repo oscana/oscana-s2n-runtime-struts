@@ -221,6 +221,7 @@
                 <doctitle>互換ライブラリ(Struts)</doctitle>
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>
+                <bottom>&amp;nbsp;</bottom>
               </configuration>
             </plugin>        </plugins>
     </build>

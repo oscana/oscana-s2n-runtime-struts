@@ -14,7 +14,7 @@ import net.unit8.http.router.RoutingException;
 import oscana.s2n.handler.HttpResourceHolder;
 
 /**
- * SAStrutsとNablarchのデータ型の違いを吸収させるためのデータ変換のユーティリティクラス。<br>
+ * 変換元FWとNablarchのデータ型の違いを吸収させるためのデータ変換のユーティリティクラス。<br>
  * <br>
  * 本APIは自動生成されたソースコード中に埋め込まれ、データ変換をサポートする。<br>
  * <br>
@@ -24,8 +24,8 @@ import oscana.s2n.handler.HttpResourceHolder;
 public class OscanaHttpResourceConverUtil {
 
     /**
-     * SAStrutsの戻り値(ファイル名)をNablarchの戻り値(HttpResponse型)に変換する。
-     * @param obj SAStrutsの戻り値として返されるパス名
+     * 戻り値(ファイル名)をNablarchの戻り値(HttpResponse型)に変換する。
+     * @param obj 変換元FWの戻り値として返されるパス名
      * @param action Actionクラス(thisを設定)
      * @param nabRequest NablarchのHttpRequest
      * @param context NablarchのExecutionContext

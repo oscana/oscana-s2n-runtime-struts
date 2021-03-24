@@ -1,10 +1,10 @@
 /*
  * 取り込み元
- *    ライブラリ名：     sa-struts
- *    クラス名：         org.seasar.struts.annotation.ShortType
- *    ソースリポジトリ： https://github.com/seasarorg/sa-struts/blob/master/src/main/java/org/seasar/struts/annotation/ShortType.java
+ *    ライブラリ名：     struts
+ *    クラス名：         org.apache.struts.validator.FieldChecks
+ *    ソースリポジトリ： https://github.com/apache/struts1/blob/trunk/core/src/main/java/org/apache/struts/validator/FieldChecks.java
  *
- * 上記ファイルを取り込み、修正を加えた。
+ * 上記実装を参考に実装した。
  *
  * Copyright 2004-2009 the Seasar Foundation and the Others.
  *

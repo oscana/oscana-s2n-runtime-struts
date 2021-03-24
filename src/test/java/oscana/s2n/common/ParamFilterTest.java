@@ -49,8 +49,8 @@ public class ParamFilterTest extends DbAccessTestSupport {
     }
 
     /**
-     * SAStrutsのSQLファイル名が存在する場合、NablarchのSQLキーに変換できること
-     * SAStrutsのSQLファイル名がnullの場合、NablarchのSQLキーに変換できないこと
+     * 変換元FWのSQLファイル名が存在する場合、NablarchのSQLキーに変換できること
+     * 変換元FWのSQLファイル名がnullの場合、NablarchのSQLキーに変換できないこと
      */
     @SuppressWarnings("static-access")
     @Test

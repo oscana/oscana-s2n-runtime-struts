@@ -27,8 +27,7 @@ import oscana.s2n.handler.HttpResourceHolder;
 /**
  * ServletContextのI/Fを提供するリソースホルダクラス。<br>
  * <br>
- * NablarchのDIコンテナには以下のサーブレットリソースは直接@Injectアノテーションで注入することができないが、<br>
- * 移行元のSAStrutsではこれらを@Resourceアノテーションにより直接注入することができるという差異がある。<br>
+ * NablarchのDIコンテナには以下のサーブレットリソースは直接@Injectアノテーションで注入することができない。<br>
  * ・javax.servlet.ServletContext<br>
  * ・javax.servlet.http.HttpServletResponse<br>
  * ・javax.servlet.http.HttpServletRequest<br>
