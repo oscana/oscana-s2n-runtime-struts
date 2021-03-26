@@ -1,5 +1,5 @@
 
-## bean validation message
+## oscana validation message
 nablarch.core.validation.ee.Required.message={fieldName}は必須です。
 nablarch.core.validation.ee.Length.min.message={fieldName}は{min}文字以上の値を入力してください。
 nablarch.core.validation.ee.Length.max.message={fieldName}は{max}文字以下の値を入力してください。
@@ -21,7 +21,7 @@ oscana.s2n.validation.Length.max.message={fieldName}は{max}文字以下の値�
 oscana.s2n.validation.Length.min.max.message={fieldName}は{min}文字以上{max}文字以下の値を入力してください。
 oscana.s2n.validation.Length.fixed.message={fieldName}は{min}文字の値を入力してください。
 oscana.s2n.validation.ParseByte.message={fieldName}はByte型として不正です。
-oscana.s2n.validation.Pattern.message={fieldName}は入力形式が不正です。入力形式={regexp}。
+oscana.s2n.validation.Pattern.message={fieldName}は入力形式が不正です。
 oscana.s2n.validation.CreditCardNumber.message={fieldName}はクレジットカードとして不正です。
 oscana.s2n.validation.Email.message={fieldName}はメールとして不正です。
 oscana.s2n.validation.Range.message={fieldName}は{min}以上{max}以下の数値を入力してください。
