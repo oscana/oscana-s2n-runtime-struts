@@ -57,6 +57,15 @@
 
     </properties>
 
+  <repositories>
+    <repository>
+      <id>maven.seasar.org</id>
+      <name>The Seasar Foundation Maven2 Repository</name>
+      <url>http://maven.seasar.org/maven2</url>
+    </repository>
+  </repositories>
+
+
  <profiles>
   <profile>
     <id>release-sign-artifacts</id>
@@ -297,6 +306,29 @@
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>
                 <bottom>&amp;nbsp;</bottom>
+
+                <additionalDependencies>
+                   <additionalDependency>
+                      <groupId>struts</groupId>
+                      <artifactId>struts</artifactId>
+                      <version>1.2.9</version>
+                   </additionalDependency>
+                   <additionalDependency>
+                     <groupId>org.seasar.sastruts</groupId>
+                     <artifactId>sa-struts</artifactId>
+                     <version>1.0.0</version>
+                   </additionalDependency>
+                  <additionalDependency>
+                     <groupId>org.apache.commons</groupId>
+                     <artifactId>commons-lang3</artifactId>
+                     <version>3.12.0</version>
+                  </additionalDependency>
+                  <additionalDependency>
+                     <groupId>org.hibernate.validator</groupId>
+                     <artifactId>hibernate-validator</artifactId>
+                     <version>7.0.1.Final</version>
+                  </additionalDependency>
+                </additionalDependencies>
               </configuration>
             </plugin>        </plugins>
     </build>
