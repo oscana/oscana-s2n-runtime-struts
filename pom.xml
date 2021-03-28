@@ -57,48 +57,13 @@
 
     </properties>
 
-  <repositories>
-    <repository>
-      <id>maven.seasar.org</id>
-      <name>The Seasar Foundation Maven2 Repository</name>
-      <url>http://maven.seasar.org/maven2</url>
-    </repository>
-  </repositories>
-
-
- <profiles>
-  <profile>
-    <id>release-sign-artifacts</id>
-    <!-- for release -->
-    <!-- mvn -DperformRelease=true deploy -->
-    <activation>
-      <property>
-        <name>performRelease</name>
-        <value>true</value>
-      </property>
-    </activation>
-    <build>
-      <plugins>
-        <!-- generate PGP Signature -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.5</version>
-          <executions>
-            <execution>
-              <id>sign-artifacts</id>
-              <phase>verify</phase>
-              <goals>
-                <goal>sign</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </build>
-  </profile>
-</profiles>
-
+    <repositories>
+      <repository>
+        <id>maven.seasar.org</id>
+        <name>The Seasar Foundation Maven2 Repository</name>
+        <url>http://maven.seasar.org/maven2</url>
+      </repository>
+    </repositories>
 
 
     <dependencyManagement>
@@ -120,7 +85,7 @@
     </dependencyManagement>
 
 
-        <dependencies>
+    <dependencies>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -267,15 +232,29 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <!-- MANIFEST.MFでClass-Pathを指定すると、依存jar内で定義されているtaglibのuriを正しく解決してくれない。 -->
-                    <useManifestOnlyJar>false</useManifestOnlyJar>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <argLine>${argLine} -javaagent:${settings.localRepository}/org/jmockit/jmockit/1.48/jmockit-1.48.jar</argLine>
-                </configuration>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>1.5</version>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>3.0.0-M5</version>
+              <configuration>
+                  <!-- MANIFEST.MFでClass-Pathを指定すると、依存jar内で定義されているtaglibのuriを正しく解決してくれない。 -->
+                  <useManifestOnlyJar>false</useManifestOnlyJar>
+                  <testFailureIgnore>true</testFailureIgnore>
+                  <argLine>${argLine} -javaagent:${settings.localRepository}/org/jmockit/jmockit/1.48/jmockit-1.48.jar</argLine>
+              </configuration>
             </plugin>
             <!-- カバレッジ取得 -->
             <plugin>
@@ -297,16 +276,37 @@
                </execution>
               </executions>
             </plugin>
+		     <plugin>
+		       <groupId>org.apache.maven.plugins</groupId>
+		       <artifactId>maven-source-plugin</artifactId>
+		       <version>3.0.1</version>
+		       <executions>
+		         <execution>
+		           <phase>package</phase>
+		           <goals>
+		             <goal>jar</goal>
+		           </goals>
+		         </execution>
+		       </executions>
+		     </plugin>
             <!-- Javadoc -->
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
+	          <executions>
+	            <execution>
+	              <phase>package</phase>
+	              <goals>
+	                <goal>jar</goal>
+	              </goals>
+	            </execution>
+	          </executions>
               <configuration>
                 <doctitle>互換ライブラリ(Struts1)</doctitle>
                 <encoding>UTF-8</encoding>
                 <charset>UTF-8</charset>
                 <bottom>&amp;nbsp;</bottom>
-
+                <failOnError>false</failOnError>
                 <additionalDependencies>
                    <additionalDependency>
                       <groupId>struts</groupId>
@@ -330,9 +330,9 @@
                   </additionalDependency>
                 </additionalDependencies>
               </configuration>
-            </plugin>        </plugins>
+            </plugin>
+          </plugins>
     </build>
-
     <reporting>
     <plugins>
       <plugin>
